@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Entreprise } from './models/entreprise.model';
+import { Dechet } from './models/dechet.model';
+import { Lieu } from './models/lieu.model';
+import { Gestion } from './models/gestion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,48 +16,21 @@ export class GetApiService {
     private http:HttpClient
   ) { }
 
-  /* Test functions */
-  apiCallTest() {
-    return this.http.get('https://jsonplaceholder.typicode.com/todos/1');
-  }
-  getAgeBasedOnName(name: string) {
-    return this.http.get('https://api.agify.io/?name=' + name);
-  }
-
-  /*
-  Endpoints prévisionnels :
-    - localhost/entreprise
-    - localhost/dechet
-    - localhost/gestion
-    - localhost/gestion/entreprise
-    - localhost/gestion/dechet
-   */
-
   /* Endpoint : /entreprise */
   getEntreprise(siren: number) {
-    return this.http.get(this.lienHost + '/entreprise/?siren=' + siren);
+    return this.http.get<Entreprise[]>(this.lienHost + '/entreprise/?siren=' + siren);
   }
 
   deleteEntreprise(siren: number) {
     return this.http.delete(this.lienHost + '/entreprise/?siren=' + siren);
   }
 
-  postEntreprise(siren: number, nom: string) {
-    return this.http.post(this.lienHost + '/entreprise',
-      {
-        "siren" : siren,
-        "nom" : nom,
-        "lieu" : ""
-      });
+  postEntreprise(command: Entreprise) {
+    return this.http.post(this.lienHost + '/entreprise', command);
   }
 
-  patchEntreprise(siren: number, nom: string) {
-    return this.http.patch(this.lienHost + '/entreprise',
-      {
-        "siren" : siren,
-        "nom" : nom,
-        "lieu" : ""
-      });
+  patchEntreprise(command: Entreprise) {
+    return this.http.patch(this.lienHost + '/entreprise', command);
   }
 
   /* Endpoint : /dechet */
@@ -65,40 +42,17 @@ export class GetApiService {
     return this.http.delete(this.lienHost + '/dechet/?id=' + id);
   }
 
-  postDechet(id: number, nom: string) {
-    return this.http.post(this.lienHost + '/dechet',
-      {
-        "id" : id,
-        "nom" : nom
-      });
+  postDechet(command: Dechet) {
+    return this.http.post(this.lienHost + '/dechet', command);
   }
 
-  patchDechet(id: number, nom: string) {
-    return this.http.post(this.lienHost + '/dechet',
-      {
-        "id" : id,
-        "nom" : nom
-      });
+  patchDechet(command: Dechet) {
+    return this.http.patch(this.lienHost + '/dechet', command);
   }
 
   /* Endpoint : /gestion */
-  /**
-   * Post la gestion des déchets d'une entreprise
-   * @param id
-   * @param siren l'id de l'entreprise
-   * @param date la date de déchet
-   * @param dechet l'id de déchet
-   * @param poid
-   */
-  postGestion(id: number, siren: number, date: string, dechet: number, poid: number) {
-    return this.http.post(this.lienHost + 'gestion',
-      {
-        "id" : id,
-        "siren" : siren,
-        "date" : date,
-        "dechet" : dechet,
-        "poid" : poid
-      });
+  postGestion(command: Gestion) {
+    return this.http.post(this.lienHost + 'gestion', command);
   }
 
   getGestion(id: number) {
@@ -109,15 +63,8 @@ export class GetApiService {
     return this.http.delete(this.lienHost + '/gestion/?id=' + id);
   }
 
-  patchGestion(id: number, siren: number, date: string, dechet: number, poid: number) {
-    return this.http.post(this.lienHost + 'gestion',
-      {
-        "id" : id,
-        "siren" : siren,
-        "date" : date,
-        "dechet" : dechet,
-        "poid" : poid
-      });
+  patchGestion(command: Gestion) {
+    return this.http.patch(this.lienHost + 'gestion', command);
   }
   /* Endpoint : /gestion/entreprise */
   getGestionEntreprise(gestionID: number) {

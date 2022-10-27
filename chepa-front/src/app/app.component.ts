@@ -14,12 +14,12 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.api.apiCallTest().subscribe((data)=>{
-      console.warn("get api data", data);
-    })
-
-    this.api.getAgeBasedOnName("Quentin").subscribe((data)=>{
-      console.warn("Age based on name : " + name, data);
-    })
+    // this.api.apiCallTest().subscribe((data)=>{
+    //   console.warn("get api data", data);
+    // })
+    //
+    // this.api.getAgeBasedOnName("Quentin").subscribe((data)=>{
+    //   console.warn("Age based on name : " + name, data);
+    // })
   }
 }
