@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -37,7 +38,8 @@ import { GestionComponent } from './gestion/gestion.component';
       {path: "dechets" , component: DechetsComponent},
       {path: "gestion" , component: GestionComponent},
 
-    ])
+    ]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

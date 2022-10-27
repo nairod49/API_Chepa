@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { GetApiService } from './get-api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'chepa-front';
   mediaSub: Subscription | undefined;
   deviceXs!: boolean;
-  constructor(public mediaObserver:MediaObserver){}
+  constructor(public mediaObserver:MediaObserver, private api:GetApiService){}
 
   ngOnInit(): void {
       this.mediaSub = this.mediaObserver.asObservable().subscribe((result:MediaChange[])=>{
