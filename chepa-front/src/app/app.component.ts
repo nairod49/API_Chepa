@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
-import { GetApiService } from 'get-api.service';
+import { GetApiService } from './get-api.service';
 
 @Component({
   selector: 'app-root',
