@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { DechetsComponent } from './dechets/dechets.component';
 import { HomeComponent } from './home/home.component';
 import { GestionComponent } from './gestion/gestion.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { GestionComponent } from './gestion/gestion.component';
       {path: "gestion" , component: GestionComponent},
 
     ]),
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

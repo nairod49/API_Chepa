@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { GetApiService } from "../get-api.service";
 
 @Component({
   selector: 'app-entreprise',
   templateUrl: './entreprise.component.html',
   styleUrls: ['./entreprise.component.css']
 })
-export class EntrepriseComponent implements OnInit {
+export class EntrepriseComponent {
 
-  constructor() { }
+  entreprise!: any;
+  constructor(private apiService: GetApiService) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.entreprise = await lastValueFrom(this.apiService.getUsers())
   }
 
 }
