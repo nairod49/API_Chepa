@@ -1,20 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Entreprise } from './models/entreprise.model';
 import { Dechet } from './models/dechet.model';
 import { Lieu } from './models/lieu.model';
 import { Gestion } from './models/gestion.model';
+import { User } from './models/user.model';
+
+const httpOptions: any = {
+  headers: new HttpHeaders({
+    //'Content-Type':  'application/json',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET',
+    'Access-Control-Allow-Origin': '*'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetApiService {
 
-  lienHost: string = 'https://data.mongodb-api.com/app/data-jvhjj/endpoint/data/v1';
+  lienHost: string = 'https://api-chepa-sercure.vercel.app/api/v1';
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
+
+  getUsers() {
+    return this.http.get(this.lienHost + '/allUser');
+  }
 
   /* Endpoint : /entreprise */
   getEntreprise(siren: number) {
@@ -24,6 +38,8 @@ export class GetApiService {
   deleteEntreprise(siren: number) {
     return this.http.delete(this.lienHost + '/entreprise/?siren=' + siren);
   }
+
+
 
   postEntreprise(command: Entreprise) {
     return this.http.post(this.lienHost + '/entreprise', command);
